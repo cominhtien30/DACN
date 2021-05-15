@@ -30,6 +30,7 @@ class phimController extends Controller
           return view('admin.list-phim',compact('list'))->with('i',$page)->with('string',$string);
           //để đếm số thứ tự thì lúc nào i cũng bằng số trang trừ cho 1
       }
+             
     public function admin_add_phim(Request $request){
         $tenphim=$request->tenphim;
         $tentienganh=$request->tentienganh;
@@ -86,8 +87,10 @@ class phimController extends Controller
     }
     public function admin_delete_phim($id){
         $delete=DB::table('phim')->whereId($id)->first();
-        $path=public_path().'/uploads/phim/'.$delete->image;
-        unlink($path);
+        if($delete->type=="Off"){
+            $path=public_path().'/uploads/phim/'.$delete->image;
+            unlink($path);
+        }
         DB::table('phim')->where('id',$id)->delete();
         $success='Xóa Thành Công';
         Session::put('success',$success );
@@ -195,27 +198,31 @@ class phimController extends Controller
         ->where('lichchieu.id_phim',$id)
         ->groupBy('rap.tenrap','lichchieu.id_rap')->distinct()
         ->get();  
-        $lich=lichchieu::where('id_phim',$id)->select('id_rap')->groupby('id_rap')->distinct()->get();
+        //check date
+        $time=Carbon::now('Asia/Ho_Chi_Minh');
+        $array_time =explode(" ",$time) ;
+        $ngay=$array_time[0];
+        $gio=$array_time[1];
+        $check_ngay=lichchieu::get();
+        foreach($check_ngay as $c){
+            if($ngay>$c->ngay){
+                $update=lichchieu::find($c->id);
+                $update->status="Off";
+                $update->save();
+            }
+        }
+        $lich=lichchieu::where('id_phim',$id)->where('status',"On")->select('id_rap')->groupby('id_rap')->distinct()->get();
         
         for($i=0;$i<count($lich);$i++){
-            $n=lichchieu::where([['id_phim',$id],['id_rap',$lich[$i]->id_rap]])->select('ngay')->groupby('ngay')->distinct()->get();
-            // for ($k=0; $k <count($n) ; $k++) { 
-            //     $p=lichchieu::where([['id_phim',$id],['id_rap',$lich[$i]->id_rap],['ngay',$n[$k]->ngay]])->select('id_phong')->groupby('id_phong')->distinct()->get();
-            //     for($j=0;$j<count($p);$j++){
-            //         $t=lichchieu::where([['id_phim',$id],['id_rap',$lich[$i]->id_rap],['ngay',$n[$k]->ngay],['id_phong',$p[$j]->id_phong]])->get();
-            //         $p[$j]['gio']=$t;
-            //     }
-                
-            //     $n[$k]['id_phong']=$p;
-            // }
+            $n=lichchieu::where([['id_phim',$id],['id_rap',$lich[$i]->id_rap]])->where('status',"On")->select('ngay')->groupby('ngay')->distinct()->get();
             for($j=0;$j<count($n);$j++){
-                $t=lichchieu::where([['id_phim',$id],['id_rap',$lich[$i]->id_rap],['ngay',$n[$j]->ngay]])->get();
+                $t=lichchieu::where([['id_phim',$id],['id_rap',$lich[$i]->id_rap],['ngay',$n[$j]->ngay]])
+                ->where('status',"On")->get();
                 $n[$j]['gio']=$t;
             }
                                                  
             $lich[$i]['ngay']=$n;
         }
-        
         $phimdangchieu = phim::where('trangthai', '1')->inRandomOrder()->limit(3)->get();
         //cmt
         $list_cmt=DB::table('cmtphim')

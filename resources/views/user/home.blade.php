@@ -181,8 +181,12 @@ Start doing.'>
                  <div class="col-sm-12 change--col">
                      @foreach($show_product as $item)
                      <div class="movie-beta__item ">
+                         @if($item->type=="Off")
                         <a href="{{route('chitietphim',$item->id)}}" class="slide__link"><img alt='' src="{{asset('public/uploads/phim/'.$item->image)}}"></a>
-                         <span class="best-rate">5.0</span>
+                        @else 
+                        <a href="{{route('chitietphim',$item->id)}}" class="slide__link"><img alt='' src="{{asset('https://image.tmdb.org/t/p/original'.$item->image)}}"></a>
+                        @endif 
+                        <span class="best-rate">5.0</span>
                         
                          <ul class="movie-beta__info"> 
                              <li><span class="best-voted">{{$item->tenphim}}</span></li>
@@ -216,7 +220,11 @@ Start doing.'>
                        <div class="movie movie--test movie--test--dark movie--test--left">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
+                                @if($item->type=="Off")
                                 <img alt='' src="{{asset('public/uploads/phim/'.$item->image)}}">
+                                @else 
+                                <img alt='' src="{{asset('https://image.tmdb.org/t/p/original'.$item->image)}}">
+                                @endif 
                             </a>
                         </div>
 

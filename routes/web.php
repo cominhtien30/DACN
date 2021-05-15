@@ -148,9 +148,11 @@ Route::group(['middleware' => 'checklogin'], function () {
 Route::group(['middleware' => 'checklogin'], function () {
    
         Route::get('/admin-list-phim','phimController@admin_list_phim')->name('admin-list-phim') ;
+        Route::get('/admin-list-phimonline','apimoviesController@list_phim')->name('admin-list-phimonline') ;
         Route::get('/admin-add-phim',function(){
             return view('admin.add-phim');
         }) ;
+        Route::get('/admin-add-phim-online','apimoviesController@insert_phim')->name('admin-add-phim-online');
         Route::post('/admin-add-phim','phimController@admin_add_phim')->name('admin-add-phim');
         Route::get('/admin-delete-phim/{id}','phimController@admin_delete_phim')->name('admin-delete-phim');
         Route::get('/admin-detail-phim/{id}','phimController@admin_detail_phim')->name('admin-detail-phim');
@@ -226,12 +228,7 @@ Route::prefix('ajax')->group(function () {
 });
 
 
-Route::get('test',function(){
-       
-    $test=DB::table('dat_combo')->distinct()->orderByDesc('id')->take(3)->get();
-       
-   echo $test;
-});
+Route::get('test','apimoviesController@get_video');
 
 
 

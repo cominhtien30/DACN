@@ -7,6 +7,7 @@
   <meta http-equiv="Content-Language" content="en">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>Admin Bug Cinema</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
   <meta name="description" content="This is an example dashboard created using build-in elements and components.">
   <meta name="msapplication-tap-highlight" content="no">
@@ -463,10 +464,22 @@
                       <i class="metismenu-icon fas fa-person-booth"></i>
                       Quản Lý Phòng
                     </a>
-                    <a href="{{url('admin-list-phim')}}">
+                   
+                      <div class="dropdown">
+                        <a class="dropdown-toggle" style="cursor: pointer;"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="metismenu-icon pe-7s-film"></i><span>Quản Lý Phim</span> 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="{{url('admin-list-phim')}}"><i class="fas fa-fast-forward"></i>&nbsp Phim Tại Rạp</a>
+                          <a class="dropdown-item" href="{{route('admin-list-phimonline')}}"> <i class="fas fa-globe-europe"></i>&nbsp Phim Online</a>
+                        </div>
+                      </div>
+                   
+                    
+                    {{-- <a href="{{url('admin-list-phim')}}">
                       <i class="metismenu-icon pe-7s-film"></i>
                       Quản Lý Phim
-                    </a>
+                    </a> --}}
                     <a href="{{url('admin-list-ghe')}}">
                       <i class="metismenu-icon fab fa-buromobelexperte"></i>
                       Quản Lý Ghế

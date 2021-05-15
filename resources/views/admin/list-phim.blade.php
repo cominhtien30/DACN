@@ -96,7 +96,7 @@
             <th>Trạng Thái</th>
             <th>Nội Dung</th>
             <th>Ảnh</th>
-            <th>Thao Tác</th>
+            <th style="width:80px">Thao Tác</th>
           </tr>
         </thead>
         <tbody>
@@ -115,7 +115,11 @@
             <td>Đang Khởi Chiếu</td>
             @endif
           <td>{{ substr($item->noidung, 0, 25 )."..."}} </td>
+          @if($item->type=="Off")
           <td><img width="42" src="{{asset('public/uploads/phim/'.$item->image)}}" alt=""></td>
+          @else
+          <td><img width="42" src="{{asset('https://image.tmdb.org/t/p/original'.$item->image)}}" alt=""></td>
+          @endif
             <td><a onclick="xacnhan()" href="{{route('admin-delete-phim',$item->id)}}"><i class="fas fa-trash" ></i></a>  ||  <a href="{{route('admin-detail-phim',$item->id)}}"><i class="fas fa-edit"></i></a> </td>
            
           </tr>

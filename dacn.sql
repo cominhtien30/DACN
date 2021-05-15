@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 30, 2021 lúc 06:06 AM
+-- Thời gian đã tạo: Th5 15, 2021 lúc 05:53 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 7.3.27
 
@@ -41,17 +41,10 @@ CREATE TABLE `cmtphim` (
 --
 
 INSERT INTO `cmtphim` (`id`, `id_phim`, `id_user`, `noidung`, `ngay`, `gio`) VALUES
-(29, 13, 3, 'chó tiến', '2021-01-06', '22:21:32'),
-(30, 13, 3, 'bbbb', '2021-01-06', '22:21:45'),
-(31, 13, 3, 'Chào em ảnh đúng đây từ chiều', '2021-01-06', '22:53:59'),
-(32, 15, 5, 'haha', '2021-01-07', '08:50:26'),
-(33, 13, 5, 'Phim quá hay', '2021-01-07', '09:07:57'),
-(34, 13, 5, 'sang', '2021-01-08', '08:38:57'),
-(35, 15, 3, 'tao nè', '2021-01-08', '21:22:14'),
-(36, 15, 3, 'huy ơi', '2021-01-08', '21:25:50'),
-(39, 15, 39, 'tuan dep trai', '2021-03-01', '20:09:05'),
-(40, 13, 3, 'lz nam', '2021-03-04', '12:19:47'),
-(41, 15, 38, 'thao xinh dep', '2021-03-09', '14:05:28');
+(44, 34, 38, 'sd', '2021-05-07', '23:34:24'),
+(45, 34, 38, 'asd', '2021-05-07', '23:34:24'),
+(46, 8, 38, 'sd', '2021-05-07', '23:35:04'),
+(47, 8, 38, 's', '2021-05-07', '23:35:31');
 
 -- --------------------------------------------------------
 
@@ -84,8 +77,6 @@ INSERT INTO `dat_combo` (`id`, `id_lichchieu`, `id_user`, `id_combo`, `soluong`,
 (29, 9, 5, 9, 1, NULL, NULL),
 (53, 11, 34, 11, 1, NULL, NULL),
 (54, 9, 38, 8, 1, NULL, NULL),
-(55, 7, 38, 8, 1, NULL, NULL),
-(56, 7, 38, 8, 1, NULL, NULL),
 (57, 5, 38, 8, 1, NULL, NULL),
 (58, 5, 38, 8, 1, NULL, NULL),
 (59, 9, 38, 8, 1, NULL, NULL),
@@ -415,22 +406,23 @@ CREATE TABLE `lichchieu` (
   `id_rap` int(11) UNSIGNED NOT NULL,
   `id_phong` int(11) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'On'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `lichchieu`
 --
 
-INSERT INTO `lichchieu` (`id`, `ngay`, `gio`, `id_phim`, `id_rap`, `id_phong`, `created_at`, `updated_at`) VALUES
-(3, '2020-11-26', '18:00:00', 13, 2, 13, NULL, NULL),
-(5, '2020-11-26', '14:00:00', 8, 1, 10, NULL, NULL),
-(7, '2020-11-09', '18:00:00', 8, 2, 13, NULL, NULL),
-(8, '2020-11-29', '08:00:00', 8, 1, 10, NULL, NULL),
-(9, '2020-12-04', '18:00:00', 13, 1, 2, NULL, NULL),
-(10, '2020-11-26', '14:30:00', 8, 1, 10, NULL, NULL),
-(11, '2021-01-09', '18:00:00', 15, 1, 2, NULL, NULL),
-(12, '2021-01-17', '14:30:00', 13, 1, 10, NULL, NULL);
+INSERT INTO `lichchieu` (`id`, `ngay`, `gio`, `id_phim`, `id_rap`, `id_phong`, `created_at`, `updated_at`, `status`) VALUES
+(3, '2020-11-26', '18:00:00', 13, 2, 13, NULL, '2021-05-07 07:03:27', 'Off'),
+(5, '2020-11-26', '14:00:00', 8, 1, 10, NULL, '2021-05-07 07:03:27', 'Off'),
+(8, '2020-11-29', '08:00:00', 8, 1, 10, NULL, '2021-05-07 07:03:27', 'Off'),
+(9, '2020-12-04', '18:00:00', 13, 1, 2, NULL, '2021-05-07 07:03:27', 'Off'),
+(11, '2021-01-09', '18:00:00', 15, 1, 2, NULL, '2021-05-07 07:03:27', 'Off'),
+(12, '2021-01-17', '14:30:00', 13, 1, 10, NULL, '2021-05-07 07:03:27', 'Off'),
+(14, '2021-05-08', '18:00:00', 15, 1, 10, NULL, '2021-05-09 07:16:09', 'Off'),
+(15, '2021-05-11', '08:00:00', 8, 1, 10, NULL, NULL, 'On');
 
 -- --------------------------------------------------------
 
@@ -464,7 +456,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2020_12_09_041755_create_dat_combo', 11),
 (16, '2020_12_27_144759_add_status_to_ghe', 12),
 (17, '2020_12_31_060145_create_test', 12),
-(19, '2021_01_06_114621_create_cmtphim_table', 13);
+(19, '2021_01_06_114621_create_cmtphim_table', 13),
+(22, '2021_05_02_044234_update_col_tbl_phim', 14),
+(23, '2021_05_07_135658_update_col_tbl_lichchieu', 15);
 
 -- --------------------------------------------------------
 
@@ -500,18 +494,23 @@ CREATE TABLE `phim` (
   `trailer` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `noidung` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Off'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `phim`
 --
 
-INSERT INTO `phim` (`id`, `tenphim`, `tentienganh`, `image`, `nsx`, `theloai`, `quocgia`, `daodien`, `dienvien`, `thoiluong`, `ngaykhoichieu`, `trangthai`, `trailer`, `noidung`, `created_at`, `updated_at`) VALUES
-(8, 'Tiệc trăng máu', 'blood Moon', 'phim-U8U11.jpg', 'Lotte', 'Hài', 'Việt Nam', 'Nguyễn Quang Dũng', 'Thái Hoà, Đức Thịnh, Hồng Ánh..', 118, '2020-11-26', '1', 'https://www.youtube.com/embed/VY4wLeReeGo', 'Bộ phim kể về bữa tiệc hội ngộ của một nhóm bạn thân thiết tại nhà của cặp vợ chồng Ánh và Quang. Trong nhóm có đôi vợ chồng son Linh và Kathy , đôi vợ chồng truyền thống Bình và Quỳnh. Đến cuối cùng là Mạnh.Ngay đầu bữa tiệc, Ánh đề nghị tất cả cùng chơi trò chơi công khai mọi tin nhắn và cuộc gọi điện thoại trong đêm đó. Trò chơi tưởng chừng đơn giản nhưng đã đẩy nhóm bạn vào những tình huống dở khóc dở cười, thậm chí căng thẳng tột độ', NULL, NULL),
-(13, 'Liên Quân Siêu Thú', 'SUPERMARKET INTEREST', 'phim-DIl490.jpg', 'CGV', 'Hài', 'Mỹ', 'Ben Smith', 'Nick Frost, Luke Evans, Gemma Arterton, Bill Nighy', 92, '2020-11-30', '1', 'https://www.youtube.com/embed/DmQTZ__oyaA', 'Năm 1969,có 1 chú chó được đưa vào không gian, nhưng một sự cố xảy ra và biến chú thành Siêu Cún. Lạc lối ở tương lai nơi tất cả mọi người đều căm ghét động vật, Siêu Cún cần tìm cho mình những trợ thủ đắc lực để giúp cậu gặp lại chủ nhân của mình. Sau cuộc gặp gỡ tình cờ với Mèo Tia Chớp, Thỏ Thông Thái và tổ chức Vệ Thú – nơi bảo vệ các loài động vật ở Glenfield, Siêu Cún và bộ sậu mới của cậu bất đắc dĩ phải đối đầu với chính quyền thị trấn và trở thành những anh hùng quả cảm..', NULL, NULL),
-(14, 'Kẻ Rình Mồi', 'Stalker', 'phim-Y9P818.jpg', 'Cinestar', 'Tình Cảm', 'Việt Nam', 'John Hyams', 'Jules Willcox, Marc Menchaca, Anthony Heald, Jonathan Rosenthal, Katie O’Grady', 120, '2020-11-28', '0', 'https://www.youtube.com/embed/yxzhsWuVf10', 'Kẻ Rình Mồi bắt đầu khi nữ chính Jessica đang dừng xe một mình trên đường thì có một người đàn ông lạ mặt gõ kính xe và nói chuyện với cô. Sau khi lịch sự từ chối lời mời kết bạn, Jessica tiếp tục lái xe đi. Thế nhưng, tại tất cả các điểm dừng chân dọc đường, Jessica đều chạm mặt hắn ta.', NULL, NULL),
-(15, 'CHỊ MƯỜI BA  3 NGÀY SINH TỬ', 'Sister 13', 'phim-BmU792.jpg', 'Cinestar', 'Hành Động', 'Việt Nam', 'Võ Thanh Hòa', 'Thu Trang, Tiến Luật, Kiều Minh Tuấn, Anh Tú, Châu Bùi, Phát La,…', 120, '2021-01-06', '1', 'https://youtu.be/CZCep4NskFs', 'CHỊ MƯỜI BA TUNG TRAILER CHÍNH THỨC 😎\r\nChào tháng 12 không cần quá hoành tráng, người chơi hệ anh em nghĩa tình Chị Mười Ba chiêu đãi anh em những thước phim chân thật, kịch tính và nhiều bí ẩn xung quanh món nợ từ trên trời rơi xuống giữa Kẽm Gai và Thắng Khùng.\r\n\r\nTình nghĩa anh em ai mới là người bên cạnh chị cuối cùng? Đón xem CHỊ MƯỜI BA - 3 Ngày Sinh Tử có suất chiếu đặc biệt từ 19h00 ngày 23.12.2020', NULL, NULL);
+INSERT INTO `phim` (`id`, `tenphim`, `tentienganh`, `image`, `nsx`, `theloai`, `quocgia`, `daodien`, `dienvien`, `thoiluong`, `ngaykhoichieu`, `trangthai`, `trailer`, `noidung`, `created_at`, `updated_at`, `type`) VALUES
+(8, 'Tiệc trăng máu', 'blood Moon', 'phim-U8U11.jpg', 'Lotte', 'Hài', 'Việt Nam', 'Nguyễn Quang Dũng', 'Thái Hoà, Đức Thịnh, Hồng Ánh..', 118, '2020-11-26', '1', 'https://www.youtube.com/embed/VY4wLeReeGo', 'Bộ phim kể về bữa tiệc hội ngộ của một nhóm bạn thân thiết tại nhà của cặp vợ chồng Ánh và Quang. Trong nhóm có đôi vợ chồng son Linh và Kathy , đôi vợ chồng truyền thống Bình và Quỳnh. Đến cuối cùng là Mạnh.Ngay đầu bữa tiệc, Ánh đề nghị tất cả cùng chơi trò chơi công khai mọi tin nhắn và cuộc gọi điện thoại trong đêm đó. Trò chơi tưởng chừng đơn giản nhưng đã đẩy nhóm bạn vào những tình huống dở khóc dở cười, thậm chí căng thẳng tột độ', NULL, NULL, 'Off'),
+(13, 'Liên Quân Siêu Thú', 'SUPERMARKET INTEREST', 'phim-DIl490.jpg', 'CGV', 'Hài', 'Mỹ', 'Ben Smith', 'Nick Frost, Luke Evans, Gemma Arterton, Bill Nighy', 92, '2020-11-30', '1', 'https://www.youtube.com/embed/DmQTZ__oyaA', 'Năm 1969,có 1 chú chó được đưa vào không gian, nhưng một sự cố xảy ra và biến chú thành Siêu Cún. Lạc lối ở tương lai nơi tất cả mọi người đều căm ghét động vật, Siêu Cún cần tìm cho mình những trợ thủ đắc lực để giúp cậu gặp lại chủ nhân của mình. Sau cuộc gặp gỡ tình cờ với Mèo Tia Chớp, Thỏ Thông Thái và tổ chức Vệ Thú – nơi bảo vệ các loài động vật ở Glenfield, Siêu Cún và bộ sậu mới của cậu bất đắc dĩ phải đối đầu với chính quyền thị trấn và trở thành những anh hùng quả cảm..', NULL, NULL, 'Off'),
+(14, 'Kẻ Rình Mồi', 'Stalker', 'phim-Y9P818.jpg', 'Cinestar', 'Tình Cảm', 'Việt Nam', 'John Hyams', 'Jules Willcox, Marc Menchaca, Anthony Heald, Jonathan Rosenthal, Katie O’Grady', 120, '2020-11-28', '0', 'https://www.youtube.com/embed/yxzhsWuVf10', 'Kẻ Rình Mồi bắt đầu khi nữ chính Jessica đang dừng xe một mình trên đường thì có một người đàn ông lạ mặt gõ kính xe và nói chuyện với cô. Sau khi lịch sự từ chối lời mời kết bạn, Jessica tiếp tục lái xe đi. Thế nhưng, tại tất cả các điểm dừng chân dọc đường, Jessica đều chạm mặt hắn ta.', NULL, NULL, 'Off'),
+(15, 'CHỊ MƯỜI BA  3 NGÀY SINH TỬ', 'Sister 13', 'phim-BmU792.jpg', 'Cinestar', 'Hành Động', 'Việt Nam', 'Võ Thanh Hòa', 'Thu Trang, Tiến Luật, Kiều Minh Tuấn, Anh Tú, Châu Bùi, Phát La,…', 120, '2021-01-06', '1', 'https://www.youtube.com/embed/Ncwkodt5dA4', 'CHỊ MƯỜI BA TUNG TRAILER CHÍNH THỨC 😎\r\nChào tháng 12 không cần quá hoành tráng, người chơi hệ anh em nghĩa tình Chị Mười Ba chiêu đãi anh em những thước phim chân thật, kịch tính và nhiều bí ẩn xung quanh món nợ từ trên trời rơi xuống giữa Kẽm Gai và Thắng Khùng.\r\n\r\nTình nghĩa anh em ai mới là người bên cạnh chị cuối cùng? Đón xem CHỊ MƯỜI BA - 3 Ngày Sinh Tử có suất chiếu đặc biệt từ 19h00 ngày 23.12.2020', NULL, NULL, 'Off'),
+(34, 'Nobody', 'Nobody', '/oBgWY00bEFeZ9N25wWVyuQddbAo.jpg', 'https://www.nobody.movie', 'NULL', 'en', 'NULL', 'NULL', 92, '2021-03-26', '1', 'https://www.youtube.com/embed/wZti8QKBWPo', 'Hutch Mansell, a suburban dad, overlooked husband, nothing neighbor — a \"nobody.\" When two thieves break into his home one night, Hutch\'s unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.', NULL, NULL, 'On'),
+(35, 'Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train', 'Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train', '/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg', 'https://kimetsu.com/anime/movie/mugenressyahen/', 'NULL', 'ja', 'NULL', 'NULL', 117, '2020-10-16', '1', 'https://www.youtube.com/embed/ATJYac_dORw', 'Tanjirō Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar\'s head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyōjurō Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!', NULL, NULL, 'On'),
+(36, 'Raya and the Last Dragon', 'Raya and the Last Dragon', '/lPsD10PP4rgUGiGR4CCXA6iY0QQ.jpg', 'https://movies.disney.com/raya-and-the-last-dragon', 'NULL', 'en', 'NULL', 'NULL', 107, '2021-03-03', '1', 'https://www.youtube.com/embed/9BPMTr-NS9s', 'Long ago, in the fantasy world of Kumandra, humans and dragons lived together in harmony. But when an evil force threatened the land, the dragons sacrificed themselves to save humanity. Now, 500 years later, that same evil has returned and it’s up to a lone warrior, Raya, to track down the legendary last dragon to restore the fractured land and its divided people.', NULL, NULL, 'On'),
+(37, 'Tom Clancy\'s Without Remorse', 'Tom Clancy\'s Without Remorse', '/rEm96ib0sPiZBADNKBHKBv5bve9.jpg', 'https://www.amazon.com/dp/B08VFD1Y3B', 'NULL', 'en', 'NULL', 'NULL', 109, '2021-04-29', '1', 'https://www.youtube.com/embed/e-rw2cxFVLg', 'An elite Navy SEAL uncovers an international conspiracy while seeking justice for the murder of his pregnant wife.', NULL, NULL, 'On');
 
 -- --------------------------------------------------------
 
@@ -790,13 +789,13 @@ ALTER TABLE `ve`
 -- AUTO_INCREMENT cho bảng `cmtphim`
 --
 ALTER TABLE `cmtphim`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT cho bảng `dat_combo`
 --
 ALTER TABLE `dat_combo`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -814,19 +813,19 @@ ALTER TABLE `ghe`
 -- AUTO_INCREMENT cho bảng `lichchieu`
 --
 ALTER TABLE `lichchieu`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `phim`
 --
 ALTER TABLE `phim`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `phong`
@@ -862,7 +861,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `ve`
 --
 ALTER TABLE `ve`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

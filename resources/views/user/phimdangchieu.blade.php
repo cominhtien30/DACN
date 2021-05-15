@@ -57,7 +57,11 @@
         <div class="movie movie--preview movie--full release">
              <div class="col-sm-3 col-md-2 col-lg-2">
                     <div class="movie__images">
+                        @if($item->type=="Off")
                         <img alt='' src="{{asset('public/uploads/phim/'.$item->image)}}">
+                        @else
+                        <img alt='' src="{{asset('https://image.tmdb.org/t/p/original'.$item->image)}}">
+                        @endif
                     </div>
                     <div class="movie__feature">
                         <a href="#" class="movie__feature-item movie__feature--comment">123</a>

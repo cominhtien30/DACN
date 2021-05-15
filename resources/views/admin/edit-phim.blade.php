@@ -164,9 +164,11 @@
               <div class="col-md-3 mb-3">
 
               
-               
+               @if($detail->type=="Off")
                 <img width="250" height="250" class="img-fluid img-thumbnail" src="{{asset('public/uploads/phim/'.$detail->image)}}" alt="">
-                
+                @else 
+                <img width="250" height="250" class="img-fluid img-thumbnail" src="{{asset('https://image.tmdb.org/t/p/original'.$detail->image)}}" alt="">
+                @endif
                 <br />
               </div>
              
@@ -227,7 +229,9 @@
     </div>
     @endif
     <?php Session::forget('error'); ?>
+    @if($detail->type=="Off")
             <button class="btn btn-success" type="submit">Cập Nhật</button>
+    @endif     
           </form>
           <script></script>
           <script>
